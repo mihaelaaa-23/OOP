@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b16faa76-a277-4a09-8c6b-6167323fec56" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/readFileJSON.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Alien.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Alien.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/readFileJSON.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/readFileJSON.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/target/classes/oop/practice/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/target/classes/oop/practice/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/target/classes/oop/practice/Universe.class" beforeDir="false" afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/target/classes/oop/practice/Universe.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +107,7 @@
       <updated>1728484382905</updated>
       <workItem from="1728484383869" duration="1283000" />
       <workItem from="1728485702487" duration="1116000" />
-      <workItem from="1728489350835" duration="797000" />
+      <workItem from="1728489350835" duration="2150000" />
     </task>
     <servers />
   </component>
