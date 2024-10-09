@@ -11,16 +11,22 @@ import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) throws IOException {
+    readFileJSON readFileJSON = new readFileJSON();
 
-    String[] traits1 = {"BLONDE", "TALL"};
-    Alien alien1 = new Alien(0, true, "Asgard", 2034, traits1);
-
-    String[] traits2 = {"EXTRA_ARMS", "EXTRA_HEAD"};
-    Alien alien2 = new Alien(1, true, "Betelgeuse", 59, traits2);
-
-    // Print alien information
-    alien1.printAlienInfo();
-    alien2.printAlienInfo();
+    try {
+      readFileJSON.readAndPrintJsonFile();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+//    String[] traits1 = {"BLONDE", "TALL"};
+//    Alien alien1 = new Alien(0, true, "Asgard", 2034, traits1);
+//
+//    String[] traits2 = {"EXTRA_ARMS", "EXTRA_HEAD"};
+//    Alien alien2 = new Alien(1, true, "Betelgeuse", 59, traits2);
+//
+//    // Print alien information
+//    alien1.printAlienInfo();
+//    alien2.printAlienInfo();
 
     ObjectMapper mapper = new ObjectMapper();
     File inputFile = new File("src/main/resources/test-input.json");
