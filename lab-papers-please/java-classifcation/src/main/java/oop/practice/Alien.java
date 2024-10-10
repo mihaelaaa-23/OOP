@@ -9,14 +9,6 @@ public class Alien {
     private int age;
     private String[] traits;
 
-    // Constructor
-//    public Alien(int id, boolean isHumanoid, String planet, int age, String[] traits) {
-//        this.id = id;
-//        this.isHumanoid = isHumanoid;
-//        this.planet = planet;
-//        this.age = age;
-//        this.traits = traits;
-//    }
 
     public Alien(){}
 
@@ -76,6 +68,13 @@ public class Alien {
             System.out.print("No Traits");
         }
         System.out.println("\n");
+    }
+
+    public boolean hasTrait(String trait) {
+        if (traits == null) {
+            return false;  // If traits array is null, return false
+        }
+        return Arrays.asList(traits).contains(trait);  // Check if trait exists in the array
     }
 }
 
