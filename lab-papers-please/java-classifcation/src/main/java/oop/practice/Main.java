@@ -3,7 +3,6 @@ package oop.practice;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -29,11 +28,9 @@ public class Main {
     List<String> classificationLog = new ArrayList<>();
 
     for (Alien alien : aliens) {
-      alien.printAlienInfo();  // Display alien info
+      alien.printAlienInfo();
 
-      String classification = null;
-
-      classification = classifyAlien(alien, starWars, hitchhikers, marvel, rings, mapper);
+      String classification = classifyAlien(alien, starWars, hitchhikers, marvel, rings, mapper);
 
       // Log the classification
       if (classification != null) {
@@ -43,15 +40,14 @@ public class Main {
       }
     }
 
-    File outputDir = new File("src/main/resources/output");
-    if (!outputDir.exists()) {
-      outputDir.mkdirs();  // Create output directory if it doesn't exist
-    }
+    View view = new View();
+    view.writeToFile(starWars, "starwars.json");
+    view.writeToFile(hitchhikers, "hitchhiker.json");
+    view.writeToFile(marvel, "marvel.json");
+    view.writeToFile(rings, "rings.json");
 
-    mapper.writeValue(new File("src/main/resources/output/starwars.json"), starWars);
-    mapper.writeValue(new File("src/main/resources/output/hitchhiker.json"), hitchhikers);
-    mapper.writeValue(new File("src/main/resources/output/marvel.json"), marvel);
-    mapper.writeValue(new File("src/main/resources/output/rings.json"), rings);
+    System.out.println("\n--- Encoded JSON for StarWars ---");
+    System.out.println(view.encodeToJson(starWars));
 
     System.out.println("\n--- Universe Classification ---");
     for (String logEntry : classificationLog) {
@@ -59,10 +55,10 @@ public class Main {
     }
   }
 
-  private static String classifyAlien(Alien alien, Universe starWars, Universe hitchhikers, Universe marvel, Universe rings, ObjectMapper mapper) throws IOException {
+  private static String classifyAlien(Alien alien, Universe starWars, Universe hitchhikers, Universe marvel, Universe rings, ObjectMapper mapper) {
     String classification = null;
 
-    // Lord of the Rings Universe Classification
+    // Lord of the Rings
     if ("Earth".equalsIgnoreCase(alien.getPlanet())) {
       if (alien.getIsHumanoid() && alien.hasTrait("BLONDE") && alien.hasTrait("POINTY_EARS")) {
         rings.individuals().add(mapper.valueToTree(alien));
@@ -129,11 +125,5 @@ public class Main {
       classification = "Lord of the Rings (Elf - High Age Predicted)";
     }
     return classification;
-  }
-
-  record Universe(
-          String name,
-          List<JsonNode> individuals
-  ) {
   }
 }

@@ -5,15 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b16faa76-a277-4a09-8c6b-6167323fec56" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Universe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Alien.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Alien.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/target/classes/oop/practice/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/target/classes/oop/practice/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/target/classes/oop/practice/Universe.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/output/hitchhiker.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/output/hitchhiker.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/output/marvel.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/output/marvel.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/output/rings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/output/rings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/output/starwars.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/output/starwars.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/output/hitchhiker.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/output/marvel.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/output/rings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/output/starwars.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output/hitchhiker.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output/marvel.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output/rings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output/starwars.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +28,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -77,6 +82,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/resources" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="java-classifcation" />
@@ -112,6 +122,8 @@
       <workItem from="1728485702487" duration="1116000" />
       <workItem from="1728489350835" duration="2150000" />
       <workItem from="1728537129347" duration="3756000" />
+      <workItem from="1728543038352" duration="839000" />
+      <workItem from="1728579410162" duration="3438000" />
     </task>
     <servers />
   </component>
