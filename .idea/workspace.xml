@@ -4,15 +4,54 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b16faa76-a277-4a09-8c6b-6167323fec56" name="Changes" comment="" />
+    <list default="true" id="b16faa76-a277-4a09-8c6b-6167323fec56" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Universe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/java/oop/practice/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/java-classifcation/target/classes/oop/practice/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/lab-papers-please/java-classifcation/target/classes/oop/practice/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/output/hitchhiker.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/output/marvel.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/output/rings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab-papers-please/output/starwars.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output/hitchhiker.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output/marvel.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output/rings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output/starwars.json" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Record" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mihaelaaa-23&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mihaelaaa-23/OOP.git&quot;,
+    &quot;accountId&quot;: &quot;6b4bdf2d-14d7-4b75-b98f-0aa42c8b817c&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -21,27 +60,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Maven.java-classifcation [clean].executor": "Run",
-    "Maven.java-classifcation [compile].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/UNIVERSITY/OOP",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Problems",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.java-classifcation [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.java-classifcation [compile].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;oop-intro-classification-system&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/UNIVERSITY/OOP&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lab-papers-please/java-classifcation/src/main/resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="java-classifcation" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="java-classifcation" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -60,6 +120,10 @@
       <updated>1728484382905</updated>
       <workItem from="1728484383869" duration="1283000" />
       <workItem from="1728485702487" duration="1116000" />
+      <workItem from="1728489350835" duration="2150000" />
+      <workItem from="1728537129347" duration="3756000" />
+      <workItem from="1728543038352" duration="839000" />
+      <workItem from="1728579410162" duration="3438000" />
     </task>
     <servers />
   </component>
