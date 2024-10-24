@@ -1,4 +1,4 @@
-package oop.practice.lab1;
+package oop.practice.lab1.task1;
 public class Display {
     private int width;
     private int height;

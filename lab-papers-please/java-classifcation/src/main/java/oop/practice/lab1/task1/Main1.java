@@ -1,6 +1,6 @@
-package oop.practice.lab1;
+package oop.practice.lab1.task1;
 
-public class Main {
+public class Main1 {
     public static void main(String[] args) {
         Display m1 = new Display(2560, 1600, 226, "13inch Macbook");
         Display m2 = new Display(3024, 1964, 254, "14inch Macbook");
