@@ -36,4 +36,8 @@ public class Display {
         compareSize(m);
         compareSharpness(m);
     }
+
+    public String getModel() {
+        return model;
+    }
 }
