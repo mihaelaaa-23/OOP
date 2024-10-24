@@ -20,6 +20,7 @@ public class TextData {
         numberOfConsonants = countConsonants();
         numberOfLetters = countLetters();
         numberOfSentences = countSentences();
+        longestWord = findLongestWord();
 
     }
 
@@ -40,37 +41,14 @@ public class TextData {
     }
 
     private String findLongestWord(){
-        String[] words = text.split("\\s+");
+        String[] words = text.split("[\\s+]"); //splits words by spaces
         String longestWord = "";
         for (String word : words){
+            word = word.replaceAll("[^a-zA-Z-]", "");
             if (word.length() > longestWord.length()){
                 longestWord = word;
             }
         }
-        return longestWord;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public int getNumberOfVowels() {
-        return numberOfVowels;
-    }
-
-    public int getNumberOfConsonants() {
-        return numberOfConsonants;
-    }
-
-    public int getNumberOfLetters() {
-        return numberOfLetters;
-    }
-
-    public int getNumberOfSentences() {
-        return numberOfSentences;
-    }
-
-    public String getLongestWord() {
         return longestWord;
     }
 
@@ -80,6 +58,6 @@ public class TextData {
         System.out.println("Consonants: " + numberOfConsonants);
         System.out.println("Letters: " + numberOfLetters);
         System.out.println("Sentences: " + numberOfSentences);
-        System.out.println("Longest word: " + findLongestWord());
+        System.out.println("Longest word: " + longestWord);
     }
 }

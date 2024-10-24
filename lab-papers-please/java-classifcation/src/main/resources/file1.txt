@@ -6,4 +6,4 @@ One of the coolest parts is inheritance. Imagine you create a "Vehicle" object f
 
 OOP also gives you a superpower called encapsulation. This is like creating a private space for your objects where their inner workings are protected from the outside world, helping to prevent errors. It makes your code cleaner and safer!
 
-Whether you’re coding a video game, building an app, or creating an online shop, OOP makes your life easier. It’s like organizing your closet—you know where everything is, and you can find and use what you need quickly and efficiently!
+Whether you’re coding a video game, building an app, or creating an online shop, OOP makes your life easier. It’s like organizing your closet-you know where everything is, and you can find and use what you need quickly and efficiently!
