@@ -1,4 +1,4 @@
-package oop.practice;
+package oop.practice.lab0;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -11,6 +11,7 @@ import java.util.List;
 
 
 public class readFileJSON {
+    private static ObjectMapper mapper = new ObjectMapper();
     public List<Alien> readAndMapJsonFile() throws IOException {
         // Load the input.json file from the classpath
         InputStream inputFile = getClass().getClassLoader().getResourceAsStream("input.json");
@@ -21,7 +22,6 @@ public class readFileJSON {
         }
 
         // Use Jackson ObjectMapper to parse the JSON
-        ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonData = mapper.readTree(inputFile);
 
         // Access the "data" array
