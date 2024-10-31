@@ -26,5 +26,6 @@ public class Main3 {
         assistant.buyDisplay(m1);
 
         assistant.assist();
+        assistant.buyDisplay(m3);
     }
 }
