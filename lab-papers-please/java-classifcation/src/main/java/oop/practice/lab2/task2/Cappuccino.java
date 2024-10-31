@@ -1,6 +1,6 @@
-package oop.practice.lab2.task1;
+package oop.practice.lab2.task2;
 
-public abstract class Cappuccino extends Coffee{
+public class Cappuccino extends Coffee {
     protected int mlOfMilk;
     protected final String name = "Cappuccino";
 
@@ -19,5 +19,11 @@ public abstract class Cappuccino extends Coffee{
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void printCoffeeDetails(){
+        super.printCoffeeDetails();
+        System.out.println(name + " milk: " + mlOfMilk + " ml ");
     }
 }

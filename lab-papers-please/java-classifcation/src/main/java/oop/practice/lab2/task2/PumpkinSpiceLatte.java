@@ -1,6 +1,6 @@
-package oop.practice.lab2.task1;
+package oop.practice.lab2.task2;
 
-public class PumpkinSpiceLatte extends Cappuccino{
+public class PumpkinSpiceLatte extends Cappuccino {
     private int mgOfPumpkinSpice;
     protected final String name = "Pumpkin Spice Latte";
 
@@ -19,5 +19,11 @@ public class PumpkinSpiceLatte extends Cappuccino{
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void printCoffeeDetails() {
+        super.printCoffeeDetails();
+        System.out.println(name + " pumpkin spice: " + mgOfPumpkinSpice + " mg");
     }
 }
