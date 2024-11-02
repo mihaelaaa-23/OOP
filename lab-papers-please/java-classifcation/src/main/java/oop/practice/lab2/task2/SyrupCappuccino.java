@@ -24,7 +24,7 @@ public class SyrupCappuccino extends Cappuccino {
     @Override
     public void printCoffeeDetails() {
         super.printCoffeeDetails();
-        System.out.println(name + " syrup: " + syrup);
+        System.out.println(getName() + " syrup: " + syrup);
     }
 }
 

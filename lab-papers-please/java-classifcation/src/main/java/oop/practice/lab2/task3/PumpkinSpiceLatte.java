@@ -10,8 +10,8 @@ public class PumpkinSpiceLatte extends Cappuccino {
     }
 
     public PumpkinSpiceLatte makePumpkinSpiceLatte() {
-        System.out.println("Making " + getName());
-        printCoffeeDetails();
+        super.makeCappuccino();
+        System.out.println("Adding " + mgOfPumpkinSpice + " mgs of pumpkin spice");
         return this;
     }
 
@@ -30,6 +30,6 @@ public class PumpkinSpiceLatte extends Cappuccino {
     @Override
     public void printCoffeeDetails() {
         super.printCoffeeDetails();
-        System.out.println("Adding " + mgOfPumpkinSpice + " mgs of pumpkin spice");
+        System.out.println(getName() + " pumpkin spice: " + mgOfPumpkinSpice + " mgs");
     }
 }

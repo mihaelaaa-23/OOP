@@ -10,8 +10,9 @@ public class Cappuccino extends Coffee {
     }
 
     public Cappuccino makeCappuccino() {
-        System.out.println("Making " + getName());
         printCoffeeDetails();
+        super.makeCoffee();
+        System.out.println("Adding " + mlOfMilk + " mls of milk");
         return this;
     }
 
@@ -30,6 +31,6 @@ public class Cappuccino extends Coffee {
     @Override
     public void printCoffeeDetails(){
         super.printCoffeeDetails();
-        System.out.println("Adding " + mlOfMilk + " mls of milk");
+        System.out.println(getName() + " milk: " + mlOfMilk + " ml");
     }
 }

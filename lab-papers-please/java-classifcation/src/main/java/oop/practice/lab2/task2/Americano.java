@@ -24,6 +24,6 @@ public class Americano extends Coffee {
     @Override
     public void printCoffeeDetails() {
         super.printCoffeeDetails();
-        System.out.println(name + " water: " + mlOfWater + " ml");
+        System.out.println(getName() + " water: " + mlOfWater + " ml");
     }
 }

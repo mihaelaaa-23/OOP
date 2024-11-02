@@ -10,8 +10,9 @@ public class Americano extends Coffee {
     }
 
     public Americano makeAmericano() {
-        System.out.println("Making " + getName());
         printCoffeeDetails();
+        super.makeCoffee();
+        System.out.println("Adding " + mlOfWater + " mls of water");
         return this;
     }
 
@@ -30,6 +31,6 @@ public class Americano extends Coffee {
     @Override
     public void printCoffeeDetails() {
         super.printCoffeeDetails();
-        System.out.println("Adding " + mlOfWater + " mls of water");
+        System.out.println(getName() + " water: " + mlOfWater + " ml");
     }
 }
