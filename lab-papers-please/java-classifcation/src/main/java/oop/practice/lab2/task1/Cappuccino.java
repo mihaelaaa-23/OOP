@@ -1,6 +1,6 @@
 package oop.practice.lab2.task1;
 
-public abstract class Cappuccino extends Coffee{
+public class Cappuccino extends Coffee{
     protected int mlOfMilk;
     protected final String name = "Cappuccino";
 
