@@ -2,7 +2,7 @@ package oop.practice.lab1.task3;
 
 import oop.practice.lab1.task1.Display;
 
-public class Main3 {
+public class Main {
     public static void main(String[] args) {
         Display m1 = new Display(2560, 1600, 226, "13inch Macbook");
         Display m2 = new Display(3024, 1964, 254, "14inch Macbook");
@@ -26,5 +26,6 @@ public class Main3 {
         assistant.buyDisplay(m1);
 
         assistant.assist();
+        assistant.buyDisplay(m3);
     }
 }

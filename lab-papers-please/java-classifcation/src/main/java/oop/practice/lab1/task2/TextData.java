@@ -10,9 +10,15 @@ public class TextData {
     private String longestWord;
 
     public TextData(String fileName, String text) {
-        this.fileName = fileName;
+//        this.fileName = fileName;
+        setFileName(fileName);
         this.text = text;
         processText();
+    }
+
+    private void setFileName(String fileName) {
+        var parts = fileName.split("[/]");
+        this.fileName = parts[parts.length - 1];
     }
 
     private void processText(){
