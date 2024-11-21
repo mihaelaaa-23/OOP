@@ -3,13 +3,18 @@ import java.util.ArrayList;
 
 public class ArrayQueue<T> implements Queue<T> {
     private ArrayList<T> items;
+    private int capacity;
 
-    public ArrayQueue() {
+    public ArrayQueue(int capacity) {
+        this.capacity = capacity;
         this.items = new ArrayList<>();
     }
 
     @Override
     public void enqueue(T item) {
+        if (isFull()) {
+            throw new IllegalStateException("Queue is full");
+        }
         items.add(item);
     }
 
@@ -35,7 +40,17 @@ public class ArrayQueue<T> implements Queue<T> {
     }
 
     @Override
+    public boolean isFull() {
+        return items.size() >= capacity;
+    }
+
+    @Override
     public int size() {
         return items.size();
+    }
+
+    @Override
+    public void clear() {
+        items.clear();
     }
 }

@@ -47,13 +47,18 @@ public class VectorQueue<T> implements Queue<T> {
         return vector.isEmpty();
     }
 
-    private boolean isFull() {
+    public boolean isFull() {
         return vector.size() >= capacity;
     }
 
     @Override
     public int size() {
         return vector.size();
+    }
+
+    @Override
+    public void clear() {
+        vector.clear();
     }
 }
 

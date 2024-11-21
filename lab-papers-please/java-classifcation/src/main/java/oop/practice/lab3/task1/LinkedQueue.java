@@ -14,11 +14,13 @@ public class LinkedQueue<T> implements Queue<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
+    private int capacity;
 
-    public LinkedQueue() {
+    public LinkedQueue(int capacity) {
         this.head = null;
         this.tail = null;
         this.size = 0;
+        this.capacity = capacity;
     }
 
     @Override
@@ -61,7 +63,19 @@ public class LinkedQueue<T> implements Queue<T> {
     }
 
     @Override
+    public boolean isFull() {
+        return size >= capacity;
+    }
+
+    @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public void clear() {  // Reset the queue
+        head = null;
+        tail = null;
+        size = 0;
     }
 }
