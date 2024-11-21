@@ -2,8 +2,8 @@ package oop.practice.lab3.task1;
 import java.util.ArrayList;
 
 public class ArrayQueue<T> implements Queue<T> {
-    private ArrayList<T> items;
-    private int capacity;
+    private final ArrayList<T> items;
+    private final int capacity;
 
     public ArrayQueue(int capacity) {
         this.capacity = capacity;
@@ -23,7 +23,7 @@ public class ArrayQueue<T> implements Queue<T> {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
-        return items.remove(0);
+        return items.removeFirst();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ArrayQueue<T> implements Queue<T> {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
-        return items.get(0);
+        return items.getFirst();
     }
 
     @Override

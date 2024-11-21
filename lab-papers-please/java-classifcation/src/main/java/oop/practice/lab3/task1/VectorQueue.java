@@ -3,13 +3,8 @@ package oop.practice.lab3.task1;
 import java.util.Vector;
 
 public class VectorQueue<T> implements Queue<T> {
-    private Vector<T> vector;
-    private int capacity;
-
-    public VectorQueue() {
-        this.capacity = Integer.MAX_VALUE;
-        this.vector = new Vector<>();
-    }
+    private final Vector<T> vector;
+    private final int capacity;
 
     public VectorQueue(int capacity) {
         this.capacity = capacity;
@@ -27,11 +22,10 @@ public class VectorQueue<T> implements Queue<T> {
 
     @Override
     public T dequeue() {
-        if (isEmpty()){
+        if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
-        T item = vector.remove(0);
-        return item;
+        return vector.removeFirst();
     }
 
     @Override

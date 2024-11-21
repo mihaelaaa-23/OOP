@@ -14,7 +14,7 @@ public class LinkedQueue<T> implements Queue<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
-    private int capacity;
+    private final int capacity;
 
     public LinkedQueue(int capacity) {
         this.head = null;
