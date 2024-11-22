@@ -25,6 +25,9 @@ public class LinkedQueue<T> implements Queue<T> {
 
     @Override
     public void enqueue(T item) {
+        if (isFull()) {
+            throw new IllegalStateException("Queue is full");
+        }
         Node<T> newNode = new Node<>(item);
         if (isEmpty()) {
             head = tail = newNode;
