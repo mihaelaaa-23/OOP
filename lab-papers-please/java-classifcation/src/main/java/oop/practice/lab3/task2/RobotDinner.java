@@ -4,7 +4,7 @@ public class RobotDinner implements Dineable{
     private static int robotsServed = 0;
 
     @Override
-    public void serveDinner(String carId) {
+    public void serveDinner(int carId) {
         robotsServed++;
         System.out.println("Serving Dinner to robots in car: " + carId);
     }
