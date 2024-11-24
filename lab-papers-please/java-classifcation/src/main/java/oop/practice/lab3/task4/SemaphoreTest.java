@@ -19,13 +19,13 @@ public class SemaphoreTest {
 
         CarStation gasStation = new CarStation(
                 carId -> System.out.println("Serving dinner to GAS car: " + carId),
-                carId -> System.out.println("Refueling GAS car: " + carId),
+                (carId, consumption) -> System.out.println("Refueling GAS car: " + carId),
                 new LinkedQueue<>(10)
         );
 
         CarStation electricStation = new CarStation(
                 carId -> System.out.println("Serving dinner to ELECTRIC car: " + carId),
-                carId -> System.out.println("Refueling ELECTRIC car: " + carId),
+                (carId, consumption) -> System.out.println("Refueling ELECTRIC car: " + carId),
                 new LinkedQueue<>(10)
         );
 
@@ -37,15 +37,16 @@ public class SemaphoreTest {
     public void testAddCarStation() {
         assertDoesNotThrow(() -> semaphore.addCarStation("NEW_TYPE",
                 new CarStation(carId -> System.out.println("Custom station: " + carId),
-                        carId -> System.out.println("Custom refuel: " + carId),
+                        (carId, consumption) -> System.out.println("Custom refuel: " + carId),
                         new LinkedQueue<>(5))));
     }
 
     @Test
     public void testRouteCar() {
-        semaphore.routeCar(new Car("GAS", "PEOPLE", true));
-        semaphore.routeCar(new Car("ELECTRIC", "ROBOTS", false));
+        semaphore.routeCar(new Car(1,"GAS", "PEOPLE", true,10));
+        semaphore.routeCar(new Car(2,"ELECTRIC", "ROBOTS", false,10));
 
+        // Verify that cars are added to the appropriate station queues
         assertEquals(1, semaphore.getGasStationQueueSize(), "GAS Station Queue should have 1 car");
         assertEquals(1, semaphore.getElectricStationQueueSize(), "ELECTRIC Station Queue should have 1 car");
 
@@ -55,9 +56,9 @@ public class SemaphoreTest {
 
     @Test
     public void testServeAllCars() {
-        semaphore.routeCar(new Car("GAS", "PEOPLE", true));
-        semaphore.routeCar(new Car("ELECTRIC", "ROBOTS", true));
-        semaphore.routeCar(new Car("GAS", "ROBOTS", false));
+        semaphore.routeCar(new Car(3,"GAS", "PEOPLE", true,10));
+        semaphore.routeCar(new Car(4,"ELECTRIC", "ROBOTS", true,10));
+        semaphore.routeCar(new Car(5,"GAS", "ROBOTS", false,10));
 
         semaphore.serveAllCars();
 
@@ -69,17 +70,17 @@ public class SemaphoreTest {
 
     @Test
     public void testDisplayAllQueues() {
-        semaphore.routeCar(new Car("GAS", "PEOPLE", true));
-        semaphore.routeCar(new Car("ELECTRIC", "ROBOTS", true));
+        semaphore.routeCar(new Car(6,"GAS", "PEOPLE", true,10));
+        semaphore.routeCar(new Car(7,"ELECTRIC", "ROBOTS", true,10));
 
         assertDoesNotThrow(semaphore::displayAllQueues);
     }
 
     @Test
     public void testGetStats() {
-        semaphore.routeCar(new Car("GAS", "PEOPLE", true));
-        semaphore.routeCar(new Car("GAS", "ROBOTS", false));
-        semaphore.routeCar(new Car("ELECTRIC", "ROBOTS", true));
+        semaphore.routeCar(new Car(8,"GAS", "PEOPLE", true,10));
+        semaphore.routeCar(new Car(9,"GAS", "ROBOTS", false,10));
+        semaphore.routeCar(new Car(10,"ELECTRIC", "ROBOTS", true,10));
 
         Map<String, Integer> stats = semaphore.getStats();
 

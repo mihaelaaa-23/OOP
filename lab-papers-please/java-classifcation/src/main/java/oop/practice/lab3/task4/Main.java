@@ -1,33 +1,54 @@
 package oop.practice.lab3.task4;
 
+import oop.practice.lab3.task1.LinkedQueue;
 import oop.practice.lab3.task3.Car;
-
-import java.util.Map;
+import oop.practice.lab3.task3.CarStation;
+import oop.practice.lab3.task2.ElectricStation;
+import oop.practice.lab3.task2.GasStation;
+import oop.practice.lab3.task2.PeopleDinner;
+import oop.practice.lab3.task2.RobotDinner;
 
 public class Main {
     public static void main(String[] args) {
         Semaphore semaphore = new Semaphore();
 
-        // Simulate cars arriving
-        Car car1 = new Car("ELECTRIC", "PEOPLE", false);
-        Car car2 = new Car("GAS", "PEOPLE", true);
-        Car car3 = new Car("GAS", "ROBOTS", true);
-        Car car4 = new Car("ELECTRIC", "ROBOTS", true);
+        CarStation gasStation = new CarStation(
+                new RobotDinner(),
+                new GasStation(),
+                new LinkedQueue<>(10)
+        );
 
-        System.out.println("Processing cars...");
-        semaphore.routeCar(car1);
-        semaphore.routeCar(car2);
-        semaphore.routeCar(car3);
-        semaphore.routeCar(car4);
+        CarStation electricStation = new CarStation(
+                new PeopleDinner(),
+                new ElectricStation(),
+                new LinkedQueue<>(10)
+        );
 
-        System.out.println("\nDisplaying queues:");
+        semaphore.addCarStation("GAS", gasStation);
+        semaphore.addCarStation("ELECTRIC", electricStation);
+
+        Car[] cars = {
+                new Car(1, "GAS", "PEOPLE", true, 30),
+                new Car(2, "ELECTRIC", "ROBOTS", false, 20),
+                new Car(3, "GAS", "ROBOTS", true, 40),
+                new Car(4, "ELECTRIC", "PEOPLE", true, 25),
+                new Car(5, "GAS", "ROBOTS", false, 15),
+                new Car(6, "ELECTRIC", "PEOPLE", false, 35),
+                new Car(7, "GAS", "PEOPLE", true, 10),
+                new Car(8, "ELECTRIC", "ROBOTS", true, 50)
+        };
+
+        for (Car car : cars) {
+            semaphore.routeCar(car);
+        }
+
+        System.out.println("\nQueues before serving:");
         semaphore.displayAllQueues();
 
-        System.out.println("\nServing all cars...");
+        System.out.println("\nServing all cars:");
         semaphore.serveAllCars();
 
         System.out.println("\nFinal Stats:");
-        Map<String, Integer> stats = semaphore.getStats();
-        stats.forEach((key, value) -> System.out.println(key + ": " + value));
+        semaphore.getStats().forEach((key, value) -> System.out.println(key + ": " + value));
     }
 }

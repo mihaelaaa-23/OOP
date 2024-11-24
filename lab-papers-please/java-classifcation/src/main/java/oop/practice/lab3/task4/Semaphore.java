@@ -10,10 +10,10 @@ import java.util.Map;
 
 public class Semaphore {
 
-    private final Queue<Car> gasStationQueue = new LinkedQueue<>(10);
-    private final Queue<Car> electricStationQueue = new LinkedQueue<>(10);
-    private final Queue<Car> peopleDiningQueue = new LinkedQueue<>(10);
-    private final Queue<Car> robotDiningQueue = new LinkedQueue<>(10);
+    private final Queue<Car> gasStationQueue = new LinkedQueue<>(31);
+    private final Queue<Car> electricStationQueue = new LinkedQueue<>(31);
+    private final Queue<Car> peopleDiningQueue = new LinkedQueue<>(31);
+    private final Queue<Car> robotDiningQueue = new LinkedQueue<>(31);
 
     private final Map<String, Integer> carTypeCount = new HashMap<>();
     private final Map<String, Integer> passengerTypeCount = new HashMap<>();
@@ -21,6 +21,7 @@ public class Semaphore {
 
     private int diningCount = 0;
     private int nonDiningCount = 0;
+
 
     public Semaphore() {
         // Initialize counts
@@ -35,39 +36,58 @@ public class Semaphore {
     }
 
     public void routeCar(Car car) {
-        CarStation station = carStations.get(car.getType());
-        if (station != null) {
-            station.addCar(car);
-            carTypeCount.put(car.getType(), carTypeCount.get(car.getType()) + 1);
-        } else {
-            System.out.println("No Car Station available for " + car.getType() + " cars.");
-        }
+        String type = car.getType();
+        String passengerType = car.getPassengerType();
+        CarStation station = carStations.get(type);
 
-        if ("GAS".equals(car.getType())) {
-            gasStationQueue.enqueue(car);
-        } else if ("ELECTRIC".equals(car.getType())) {
-            electricStationQueue.enqueue(car);
+        if (station != null) {
+            try {
+                station.addCar(car);
+
+                if ("GAS".equals(type)) {
+                    gasStationQueue.enqueue(car);
+                    carTypeCount.put("GAS", carTypeCount.get("GAS") + 1);
+                } else if ("ELECTRIC".equals(type)) {
+                    electricStationQueue.enqueue(car);
+                    carTypeCount.put("ELECTRIC", carTypeCount.get("ELECTRIC") + 1);
+                }
+            } catch (IllegalStateException e) {
+                System.err.println("Queue is full at " + type + " station for car: " + car);
+            }
+        } else {
+            System.out.println("No Car Station available for " + type + " cars.");
         }
 
         if (car.isWantsDinner()) {
             diningCount++;
-            if ("PEOPLE".equals(car.getPassengerType())) {
-                peopleDiningQueue.enqueue(car);
-                passengerTypeCount.put("PEOPLE", passengerTypeCount.get("PEOPLE") + 1);
-            } else if ("ROBOTS".equals(car.getPassengerType())) {
-                robotDiningQueue.enqueue(car);
-                passengerTypeCount.put("ROBOTS", passengerTypeCount.get("ROBOTS") + 1);
+            try {
+                if ("PEOPLE".equals(passengerType)) {
+                    peopleDiningQueue.enqueue(car);
+                    passengerTypeCount.put("PEOPLE", passengerTypeCount.get("PEOPLE") + 1);
+                } else if ("ROBOTS".equals(passengerType)) {
+                    robotDiningQueue.enqueue(car);
+                    passengerTypeCount.put("ROBOTS", passengerTypeCount.get("ROBOTS") + 1);
+                }
+            } catch (IllegalStateException e) {
+                System.err.println("Dining queue full for " + passengerType + ": " + car);
             }
         } else {
             nonDiningCount++;
         }
     }
 
+
+
     public void serveAllCars() {
         serveQueue(gasStationQueue, "Refueling GAS car: ");
         serveQueue(electricStationQueue, "Refueling ELECTRIC car: ");
         serveQueue(peopleDiningQueue, "Serving dinner to PEOPLE in car: ");
         serveQueue(robotDiningQueue, "Serving dinner to ROBOTS in car: ");
+
+        if (gasStationQueue.isEmpty() && electricStationQueue.isEmpty()) {
+            System.out.println("No cars to serve...");
+            return;
+        }
     }
 
     private void serveQueue(Queue<Car> queue, String actionMessage) {
