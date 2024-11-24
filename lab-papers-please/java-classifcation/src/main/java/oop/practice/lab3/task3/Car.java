@@ -1,14 +1,29 @@
 package oop.practice.lab3.task3;
 
-public class Car {
-    private String type;
-    private String passengerType;
-    private boolean wantsDinner;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public Car(String type, String passengerType, boolean wantsDinner) {
+public class Car {
+    private int id;
+    private String type; // GAS or ELECTRIC
+    private String passengerType; // PEOPLE or ROBOTS
+    private boolean wantsDinner;
+    private int consumption;
+
+    public Car(
+            @JsonProperty("id") int id,
+            @JsonProperty("type") String type,
+            @JsonProperty("passengers") String passengerType,
+            @JsonProperty("isDining") boolean wantsDinner,
+            @JsonProperty("consumption") int consumption) {
+        this.id = id;
         this.type = type;
         this.passengerType = passengerType;
         this.wantsDinner = wantsDinner;
+        this.consumption = consumption;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getType() {
@@ -23,12 +38,18 @@ public class Car {
         return wantsDinner;
     }
 
+    public int getConsumption() {
+        return consumption;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
-                "type='" + type + '\'' +
+                "id=" + id +
+                ", type='" + type + '\'' +
                 ", passengerType='" + passengerType + '\'' +
                 ", wantsDinner=" + wantsDinner +
+                ", consumption=" + consumption +
                 '}';
     }
 }

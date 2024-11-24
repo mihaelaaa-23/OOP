@@ -1,8 +1,7 @@
 package oop.practice.lab3.task3;
 
 import oop.practice.lab3.task1.Queue;
-import oop.practice.lab3.task2.Dineable;
-import oop.practice.lab3.task2.Refuelable;
+import oop.practice.lab3.task2.*;
 
 public class CarStation {
     private Dineable diningService;
@@ -19,14 +18,15 @@ public class CarStation {
         queue.enqueue(car);
     }
 
-    public void serveCars(){
-        while (!queue.isEmpty()){
+    public void serveCars() {
+        while (!queue.isEmpty()) {
             Car car = queue.dequeue();
 
-            if (car.isWantsDinner()){
-                diningService.serveDinner(car.getType() + " Car");
+            if (car.isWantsDinner()) {
+                diningService.serveDinner(car.getId());
             }
-            refuelingService.refuel(car.getType() + " Car");
+
+            refuelingService.refuel(car.getId());
         }
     }
 }

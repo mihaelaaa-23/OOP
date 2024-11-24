@@ -25,7 +25,7 @@ public class CarStationTest {
 
     @Test
     public void testAddCar() {
-        Car car = new Car("GAS", "PEOPLE", true); // Updated
+        Car car = new Car(1,"GAS", "PEOPLE", true,10); // Updated
         carStation.addCar(car);
 
         assertFalse(carQueue.isEmpty());
@@ -35,8 +35,8 @@ public class CarStationTest {
 
     @Test
     public void testServeCars() {
-        carStation.addCar(new Car("GAS", "PEOPLE", true));       // Wants dinner
-        carStation.addCar(new Car("ELECTRIC", "ROBOTS", false)); // No dinner
+        carStation.addCar(new Car(2,"GAS", "PEOPLE", true,12));       // Wants dinner
+        carStation.addCar(new Car(3,"ELECTRIC", "ROBOTS", false,10)); // No dinner
 
         carStation.serveCars();
 
@@ -46,9 +46,9 @@ public class CarStationTest {
     @Test
     public void testAllCarsWantDinner() {
         // Add cars that all want dinner
-        carStation.addCar(new Car("GAS", "PEOPLE", true));
-        carStation.addCar(new Car("ELECTRIC", "ROBOTS", true));
-        carStation.addCar(new Car("GAS", "ROBOTS", true));
+        carStation.addCar(new Car(4,"GAS", "PEOPLE", true,10));
+        carStation.addCar(new Car(5,"ELECTRIC", "ROBOTS", true,10));
+        carStation.addCar(new Car(6,"GAS", "ROBOTS", true,10));
 
         carStation.serveCars();
 
@@ -57,8 +57,8 @@ public class CarStationTest {
 
     @Test
     public void testNoCarsWantDinner() {
-        carStation.addCar(new Car("GAS", "PEOPLE", false));
-        carStation.addCar(new Car("ELECTRIC", "ROBOTS", false));
+        carStation.addCar(new Car(7,"GAS", "PEOPLE", false,10));
+        carStation.addCar(new Car(8,"ELECTRIC", "ROBOTS", false,10));
 
         carStation.serveCars();
 
@@ -75,7 +75,7 @@ public class CarStationTest {
     @Test
     public void testServeLargeNumberOfCars() {
         for (int i = 1; i <= 5; i++) {
-            carStation.addCar(new Car("GAS", "PEOPLE", i % 2 == 0)); // Alternate dinner requests
+            carStation.addCar(new Car(9,"GAS", "PEOPLE", i % 2 == 0,10)); // Alternate dinner requests
         }
 
         carStation.serveCars();
@@ -85,10 +85,10 @@ public class CarStationTest {
 
     @Test
     public void testMixedCars() {
-        carStation.addCar(new Car("GAS", "PEOPLE", true));       // Wants dinner
-        carStation.addCar(new Car("ELECTRIC", "ROBOTS", false)); // No dinner
-        carStation.addCar(new Car("GAS", "ROBOTS", false));      // No dinner
-        carStation.addCar(new Car("ELECTRIC", "PEOPLE", true));  // Wants dinner
+        carStation.addCar(new Car(10,"GAS", "PEOPLE", true,10));       // Wants dinner
+        carStation.addCar(new Car(11,"ELECTRIC", "ROBOTS", false,10)); // No dinner
+        carStation.addCar(new Car(12,"GAS", "ROBOTS", false,10));      // No dinner
+        carStation.addCar(new Car(13,"ELECTRIC", "PEOPLE", true,10));  // Wants dinner
 
         carStation.serveCars();
 
@@ -98,10 +98,10 @@ public class CarStationTest {
     @Test
     public void testQueueOverflow() {
         for (int i = 1; i <= 5; i++) {
-            carStation.addCar(new Car("GAS", "PEOPLE", false));
+            carStation.addCar(new Car(14,"GAS", "PEOPLE", false,10));
         }
 
-        assertThrows(IllegalStateException.class, () -> carStation.addCar(new Car("ELECTRIC", "ROBOTS", true)),
+        assertThrows(IllegalStateException.class, () -> carStation.addCar(new Car(15,"ELECTRIC", "ROBOTS", true,10)),
                 "Adding a car to a full queue should throw an exception");
     }
 }
