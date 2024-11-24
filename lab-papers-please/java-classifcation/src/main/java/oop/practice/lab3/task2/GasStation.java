@@ -8,7 +8,7 @@ public class GasStation implements Refuelable {
     public void refuel(int carId, int consumption) {
         gasCarsServed++;
         gasConsumption += consumption;
-        System.out.println("Refueling gas car: " + carId);
+        System.out.println("Refueling GAS car: " + carId);
     }
 
     public static int getGasCarsServed() {

@@ -7,7 +7,7 @@ public class PeopleDinner implements Dineable {
     @Override
     public void serveDinner(int carId) {
         peopleServed++;
-        System.out.println("Serving dinner to people in car: " + carId);
+        System.out.println("Serving dinner to PEOPLE in car: " + carId);
     }
 
     public static void countPeople(){

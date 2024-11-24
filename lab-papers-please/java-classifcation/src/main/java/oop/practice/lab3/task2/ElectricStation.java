@@ -8,7 +8,7 @@ public class ElectricStation implements Refuelable{
     public void refuel(int carId, int consumption) {
         electricCarsServed++;
         electricConsumption += consumption;
-        System.out.println("Refueling electric car: " + carId);
+        System.out.println("Refueling ELECTRIC car: " + carId);
     }
 
     public static int getElectricCarsServed() {
