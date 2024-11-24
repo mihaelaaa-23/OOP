@@ -49,10 +49,10 @@ public class InterfaceTest {
 
     @Test
     public void testRefuel() {
-        gasStation1.refuel(4);
-        gasStation2.refuel(5);
-        electricStation.refuel(6);
-        electricStation.refuel(7);
+        gasStation1.refuel(4,20);
+        gasStation2.refuel(5,20);
+        electricStation.refuel(6,20);
+        electricStation.refuel(7,20);
 
         System.out.println();
         assertEquals(2, GasStation.getGasCarsServed());
@@ -65,10 +65,10 @@ public class InterfaceTest {
         peopleDinner1.serveDinner(1);
         peopleDinner2.serveDinner(1);
         robotDinner.serveDinner(3);
-        gasStation1.refuel(4);
-        gasStation2.refuel(5);
-        electricStation.refuel(6);
-        electricStation.refuel(7);
+        gasStation1.refuel(4,20);
+        gasStation2.refuel(5,20);
+        electricStation.refuel(6,20);
+        electricStation.refuel(7,20);
 
         System.out.println();
         assertEquals(2, PeopleDinner.getPeopleServed(), "Total people served should be 2");
@@ -86,10 +86,10 @@ public class InterfaceTest {
     @Test
     public void testSkipDining() {
         // Simulate cars that don't want to dine
-        gasStation1.refuel(8);
-        gasStation2.refuel(9);
-        electricStation.refuel(10);
-        electricStation.refuel(11);
+        gasStation1.refuel(8,20);
+        gasStation2.refuel(9,20);
+        electricStation.refuel(10,20);
+        electricStation.refuel(11,20);
 
         System.out.println();
         // Ensure dining counts are not incremented
