@@ -1,7 +1,12 @@
 package oop.practice.lab3.task4;
-import oop.practice.lab3.task3.CarStation;
+
 import oop.practice.lab3.task1.LinkedQueue;
 import oop.practice.lab3.task3.Car;
+import oop.practice.lab3.task3.CarStation;
+import oop.practice.lab3.task2.ElectricStation;
+import oop.practice.lab3.task2.GasStation;
+import oop.practice.lab3.task2.PeopleDinner;
+import oop.practice.lab3.task2.RobotDinner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,82 +20,87 @@ public class SemaphoreTest {
 
     @BeforeEach
     public void setUp() {
-        semaphore = new Semaphore();
-
-        CarStation gasStation = new CarStation(
-                carId -> System.out.println("Serving dinner to GAS car: " + carId),
-                (carId, consumption) -> System.out.println("Refueling GAS car: " + carId),
+        CarStation gasPeopleStation = new CarStation(
+                new PeopleDinner(),
+                new GasStation(),
                 new LinkedQueue<>(10)
         );
 
-        CarStation electricStation = new CarStation(
-                carId -> System.out.println("Serving dinner to ELECTRIC car: " + carId),
-                (carId, consumption) -> System.out.println("Refueling ELECTRIC car: " + carId),
+        CarStation gasRobotStation = new CarStation(
+                new RobotDinner(),
+                new GasStation(),
                 new LinkedQueue<>(10)
         );
 
-        semaphore.addCarStation("GAS", gasStation);
-        semaphore.addCarStation("ELECTRIC", electricStation);
-    }
+        CarStation electricPeopleStation = new CarStation(
+                new PeopleDinner(),
+                new ElectricStation(),
+                new LinkedQueue<>(10)
+        );
 
-    @Test
-    public void testAddCarStation() {
-        assertDoesNotThrow(() -> semaphore.addCarStation("NEW_TYPE",
-                new CarStation(carId -> System.out.println("Custom station: " + carId),
-                        (carId, consumption) -> System.out.println("Custom refuel: " + carId),
-                        new LinkedQueue<>(5))));
+        CarStation electricRobotStation = new CarStation(
+                new RobotDinner(),
+                new ElectricStation(),
+                new LinkedQueue<>(10)
+        );
+
+        semaphore = new Semaphore(gasPeopleStation, gasRobotStation, electricPeopleStation, electricRobotStation);
     }
 
     @Test
     public void testRouteCar() {
-        semaphore.routeCar(new Car(1,"GAS", "PEOPLE", true,10));
-        semaphore.routeCar(new Car(2,"ELECTRIC", "ROBOTS", false,10));
+        semaphore.routeCar(new Car(1, "GAS", "PEOPLE", true, 10));
+        semaphore.routeCar(new Car(2, "GAS", "ROBOTS", false, 20));
+        semaphore.routeCar(new Car(3, "ELECTRIC", "PEOPLE", true, 30));
+        semaphore.routeCar(new Car(4, "ELECTRIC", "ROBOTS", false, 40));
 
-        // Verify that cars are added to the appropriate station queues
-        assertEquals(1, semaphore.getGasStationQueueSize(), "GAS Station Queue should have 1 car");
-        assertEquals(1, semaphore.getElectricStationQueueSize(), "ELECTRIC Station Queue should have 1 car");
-
-        assertEquals(1, semaphore.getPeopleDiningQueueSize(), "PEOPLE Dining Queue should have 1 car");
-        assertEquals(0, semaphore.getRobotDiningQueueSize(), "ROBOTS Dining Queue should be empty");
+        Map<String, Integer> stats = semaphore.getStats();
+        assertEquals(2, stats.get("GAS Cars served"), "Two GAS cars should have been routed");
+        assertEquals(2, stats.get("ELECTRIC Cars served"), "Two ELECTRIC cars should have been routed");
+        assertEquals(2, stats.get("PEOPLE Total"), "Two PEOPLE cars should have been routed");
+        assertEquals(2, stats.get("ROBOTS Total"), "Two ROBOTS cars should have been routed");
     }
 
     @Test
     public void testServeAllCars() {
-        semaphore.routeCar(new Car(3,"GAS", "PEOPLE", true,10));
-        semaphore.routeCar(new Car(4,"ELECTRIC", "ROBOTS", true,10));
-        semaphore.routeCar(new Car(5,"GAS", "ROBOTS", false,10));
+        semaphore.routeCar(new Car(5, "GAS", "PEOPLE", true, 10));
+        semaphore.routeCar(new Car(6, "ELECTRIC", "ROBOTS", true, 15));
+        semaphore.routeCar(new Car(7, "GAS", "ROBOTS", false, 20));
+        semaphore.routeCar(new Car(8, "ELECTRIC", "PEOPLE", true, 25));
 
         semaphore.serveAllCars();
 
-        assertEquals(0, semaphore.getGasStationQueueSize(), "GAS Station Queue should be empty after serving");
-        assertEquals(0, semaphore.getElectricStationQueueSize(), "ELECTRIC Station Queue should be empty after serving");
-        assertEquals(0, semaphore.getPeopleDiningQueueSize(), "PEOPLE Dining Queue should be empty after serving");
-        assertEquals(0, semaphore.getRobotDiningQueueSize(), "ROBOTS Dining Queue should be empty after serving");
-    }
-
-    @Test
-    public void testDisplayAllQueues() {
-        semaphore.routeCar(new Car(6,"GAS", "PEOPLE", true,10));
-        semaphore.routeCar(new Car(7,"ELECTRIC", "ROBOTS", true,10));
-
-        assertDoesNotThrow(semaphore::displayAllQueues);
+        Map<String, Integer> stats = semaphore.getStats();
+        assertEquals(3, stats.get("DINING cars"), "All dining cars should have been served");
+        assertEquals(1, stats.get("NON-DINING cars"), "All non-dining cars should have been served");
     }
 
     @Test
     public void testGetStats() {
-        semaphore.routeCar(new Car(8,"GAS", "PEOPLE", true,10));
-        semaphore.routeCar(new Car(9,"GAS", "ROBOTS", false,10));
-        semaphore.routeCar(new Car(10,"ELECTRIC", "ROBOTS", true,10));
+        semaphore.routeCar(new Car(13, "GAS", "PEOPLE", true, 10));
+        semaphore.routeCar(new Car(14, "GAS", "ROBOTS", true, 15));
+        semaphore.routeCar(new Car(15, "ELECTRIC", "PEOPLE", false, 20));
+        semaphore.routeCar(new Car(16, "ELECTRIC", "ROBOTS", false, 25));
 
         Map<String, Integer> stats = semaphore.getStats();
-
-        assertEquals(2, stats.get("GAS Cars served"), "GAS cars served should be 2");
-        assertEquals(1, stats.get("ELECTRIC Cars served"), "ELECTRIC cars served should be 1");
-        assertEquals(1, stats.get("PEOPLE Served Dinner"), "PEOPLE should be served dinner");
-        assertEquals(1, stats.get("ROBOTS Served Dinner"), "ROBOTS should be served dinner");
-        assertEquals(2, stats.get("DINING cars"), "DINING cars should be 2");
-        assertEquals(1, stats.get("NON-DINING cars"), "NON-DINING cars should be 1");
+        assertEquals(2, stats.get("GAS Cars served"), "Two GAS cars should have been routed");
+        assertEquals(2, stats.get("ELECTRIC Cars served"), "Two ELECTRIC cars should have been routed");
+        assertEquals(2, stats.get("PEOPLE Total"), "Two PEOPLE cars should have been routed");
+        assertEquals(2, stats.get("ROBOTS Total"), "Two ROBOTS cars should have been routed");
+        assertEquals(2, stats.get("DINING cars"), "Two cars should have requested dining");
+        assertEquals(2, stats.get("NON-DINING cars"), "Two cars should not have requested dining");
     }
 
+    @Test
+    public void testNoCars() {
+        semaphore.serveAllCars();
 
+        Map<String, Integer> stats = semaphore.getStats();
+        assertEquals(0, stats.get("GAS Cars served"), "No GAS cars should have been served");
+        assertEquals(0, stats.get("ELECTRIC Cars served"), "No ELECTRIC cars should have been served");
+        assertEquals(0, stats.get("PEOPLE Total"), "No PEOPLE cars should have been served");
+        assertEquals(0, stats.get("ROBOTS Total"), "No ROBOTS cars should have been served");
+        assertEquals(0, stats.get("DINING cars"), "No dining cars should have been served");
+        assertEquals(0, stats.get("NON-DINING cars"), "No non-dining cars should have been served");
+    }
 }

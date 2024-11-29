@@ -22,10 +22,17 @@ public class CarStation {
         while (!queue.isEmpty()) {
             Car car = queue.dequeue();
 
+            if ("PEOPLE".equals(car.getPassengerType())) {
+                PeopleDinner.countPeople();
+            } else if ("ROBOTS".equals(car.getPassengerType())) {
+                RobotDinner.countRobot();
+            } else {
+                System.err.println("Unknown passenger type for car ID: " + car.getId());
+            }
+
             if (car.isWantsDinner()) {
                 diningService.serveDinner(car.getId());
             }
-
             refuelingService.refuel(car.getId(), car.getConsumption());
         }
     }
