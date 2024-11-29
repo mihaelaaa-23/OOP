@@ -1,5 +1,7 @@
 package oop.practice.lab3.task5;
+import oop.practice.lab3.task1.ArrayQueue;
 import oop.practice.lab3.task1.LinkedQueue;
+import oop.practice.lab3.task1.Queue;
 import oop.practice.lab3.task3.Car;
 import oop.practice.lab3.task3.CarStation;
 import oop.practice.lab3.task2.ElectricStation;
@@ -8,9 +10,12 @@ import oop.practice.lab3.task2.PeopleDinner;
 import oop.practice.lab3.task2.RobotDinner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import oop.practice.lab3.task4.Semaphore;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -21,23 +26,41 @@ public class Scheduler {
     private final ScheduledExecutorService pollingExecutor = Executors.newSingleThreadScheduledExecutor();
     private final ScheduledExecutorService servingExecutor = Executors.newSingleThreadScheduledExecutor();
 
-    private final CarStation gasStation;
-    private final CarStation electricStation;
+    private final CarStation gasPeopleStation;
+    private final CarStation gasRobotStation;
+    private final CarStation electricPeopleStation;
+    private final CarStation electricRobotStation;
+
+    private final Semaphore semaphore;
 
     public Scheduler(String queueDirectory) {
         this.queueDirectory = queueDirectory;
 
-        this.gasStation = new CarStation(
-                new RobotDinner(),
+        this.gasPeopleStation = new CarStation(
+                new PeopleDinner(),
                 new GasStation(),
                 new LinkedQueue<>(30)
         );
 
-        this.electricStation = new CarStation(
+        this.gasRobotStation = new CarStation(
+                new RobotDinner(),
+                new GasStation(),
+                new ArrayQueue<>(30)
+        );
+
+        this.electricPeopleStation = new CarStation(
                 new PeopleDinner(),
                 new ElectricStation(),
                 new LinkedQueue<>(30)
         );
+
+        this.electricRobotStation = new CarStation(
+                new RobotDinner(),
+                new ElectricStation(),
+                new ArrayQueue<>(30)
+        );
+
+        semaphore = new Semaphore(gasPeopleStation, gasRobotStation, electricPeopleStation, electricRobotStation);
     }
 
     private void pollQueueDirectory() {
@@ -52,21 +75,7 @@ public class Scheduler {
             for (File file : files) {
                 try {
                     Car car = objectMapper.readValue(file, Car.class);
-
-                    if ("PEOPLE".equals(car.getPassengerType())) {
-                        PeopleDinner.countPeople();
-                    } else if ("ROBOTS".equals(car.getPassengerType())) {
-                        RobotDinner.countRobot();
-                    }
-
-                    if ("GAS".equals(car.getType())) {
-                        gasStation.addCar(car);
-                    } else if ("ELECTRIC".equals(car.getType())) {
-                        electricStation.addCar(car);
-                    } else {
-                        System.err.println("Unknown car type: " + car.getType());
-                    }
-
+                    semaphore.routeCar(car);
 //                    System.out.println("Processed car ID: " + car.getId());
                     Files.delete(Paths.get(file.getPath()));
 
@@ -89,9 +98,8 @@ public class Scheduler {
 
     public void scheduleServing(int intervalSeconds) {
         servingExecutor.scheduleAtFixedRate(() -> {
-            System.out.println("\n\uD83D\uDE97Serving cars \uD83D\uDE97");
-            gasStation.serveCars();
-            electricStation.serveCars();
+            System.out.println("\n🚗 Serving cars 🚗");
+            semaphore.serveAllCars();
         }, 0, intervalSeconds, TimeUnit.SECONDS);
     }
 
@@ -108,12 +116,12 @@ public class Scheduler {
                 servingExecutor.shutdownNow();
             }
 
-            // Ensure all cars in queues are served
 //            System.out.println("Serving all remaining cars...");
-            gasStation.serveCars();
-            electricStation.serveCars();
+            gasPeopleStation.serveCars();
+            gasRobotStation.serveCars();
+            electricPeopleStation.serveCars();
+            electricRobotStation.serveCars();
 
-            // Print final statistics
             printStats();
 
 //            System.out.println("Scheduler shut down successfully.");
@@ -125,31 +133,21 @@ public class Scheduler {
     }
 
     public void printStats() {
-        int electricCarsServed = ElectricStation.getElectricCarsServed();
-        int gasCarsServed = GasStation.getGasCarsServed();
-        int peopleServedDinner = PeopleDinner.getPeopleServed();
-        int robotsServedDinner = RobotDinner.getRobotsServed();
-        int totalPeople = PeopleDinner.getTotalPeople();
-        int totalRobots = RobotDinner.getTotalRobots();
-        int totalDining = peopleServedDinner + robotsServedDinner;
-        int totalNotDining = (electricCarsServed + gasCarsServed) - totalDining;
-        int electricConsumption = ElectricStation.getElectricConsumption();
-        int gasConsumption = GasStation.getGasConsumption();
-
-        String stats = String.format(
+        Map<String, Integer> stats = semaphore.getStats();
+        String statsString = String.format(
                 "{ \"ELECTRIC\": %d, \"GAS\": %d, \"PEOPLE\": %d, \"ROBOTS\": %d, \"DINING\": %d, \"NOT_DINING\": %d, " +
                         "\"CONSUMPTION\": { \"ELECTRIC\": %d, \"GAS\": %d } }",
-                electricCarsServed,
-                gasCarsServed,
-                totalPeople,
-                totalRobots,
-                totalDining,
-                totalNotDining,
-                electricConsumption,
-                gasConsumption
+                stats.get("ELECTRIC Cars served"),
+                stats.get("GAS Cars served"),
+                stats.get("PEOPLE Total"),
+                stats.get("ROBOTS Total"),
+                stats.get("DINING cars"),
+                stats.get("NON-DINING cars"),
+                ElectricStation.getElectricConsumption(),
+                GasStation.getGasConsumption()
         );
 
         System.out.println();
-        System.out.println(stats);
+        System.out.println(statsString);
     }
 }
