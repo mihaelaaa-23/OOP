@@ -1,7 +1,6 @@
 package oop.practice.lab3.task5;
 import oop.practice.lab3.task1.ArrayQueue;
 import oop.practice.lab3.task1.LinkedQueue;
-import oop.practice.lab3.task1.Queue;
 import oop.practice.lab3.task3.Car;
 import oop.practice.lab3.task3.CarStation;
 import oop.practice.lab3.task2.ElectricStation;
@@ -20,7 +19,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Scheduler {
+public class CarServeScheduler {
     private final String queueDirectory;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final ScheduledExecutorService pollingExecutor = Executors.newSingleThreadScheduledExecutor();
@@ -33,7 +32,7 @@ public class Scheduler {
 
     private final Semaphore semaphore;
 
-    public Scheduler(String queueDirectory) {
+    public CarServeScheduler(String queueDirectory) {
         this.queueDirectory = queueDirectory;
 
         this.gasPeopleStation = new CarStation(
@@ -92,11 +91,11 @@ public class Scheduler {
         }
     }
 
-    public void schedulePolling(int intervalSeconds) {
+    public void polling(int intervalSeconds) {
         pollingExecutor.scheduleAtFixedRate(this::pollQueueDirectory, 0, intervalSeconds, TimeUnit.SECONDS);
     }
 
-    public void scheduleServing(int intervalSeconds) {
+    public void serving(int intervalSeconds) {
         servingExecutor.scheduleAtFixedRate(() -> {
             System.out.println("\n🚗 Serving cars 🚗");
             semaphore.serveAllCars();
