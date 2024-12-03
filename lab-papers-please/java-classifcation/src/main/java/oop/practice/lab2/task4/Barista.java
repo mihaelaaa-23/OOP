@@ -9,6 +9,9 @@ public class Barista {
             if (coffee != null) {
                 System.out.println("\n☕\uFE0F☕\uFE0F☕\uFE0F");
                 switch (order.toLowerCase()) {
+                    case "coffee":
+                        ((Coffee) coffee).makeCoffee();
+                        break;
                     case "cappuccino":
                         ((Cappuccino) coffee).makeCappuccino();
                         break;
@@ -33,6 +36,8 @@ public class Barista {
 
     private Coffee createOrder(String order){
         switch (order.toLowerCase()){
+            case "coffee":
+                return new Coffee(Coffee.Intensity.STRONG);
             case "cappuccino":
                 return new Cappuccino(Coffee.Intensity.NORMAL, 150);
             case "americano":
